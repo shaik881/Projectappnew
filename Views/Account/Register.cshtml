@@ -1,0 +1,71 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<div>
+    <form  asp-controller="Account" asp-action="Register" method="post">
+        <!-- Role Selection Dropdown in the Header -->
+        <div class="form-group">
+            <label asp-for="Role">Role</label>
+            <select asp-for="Role" class="form-control" required>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select>
+        </div>
+
+        <!-- First Name -->
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" required />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" required />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" type="email" class="form-control" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <!-- Mobile Number -->
+        <div class="form-group">
+            <label asp-for="MobileNumber"></label>
+            <input asp-for="MobileNumber" type="tel" class="form-control" required />
+            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control" required class="input-group-text" onclick="togglePasswordVisibility('Password')" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+               
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" type="password" class="form-control" required />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

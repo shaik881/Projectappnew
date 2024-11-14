@@ -1,0 +1,148 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Registration page";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-yellow-500 font-roboto">
+
+    <header class="bg-yellow-700 p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <img src="https://storage.googleapis.com/a1aa/image/vY3mz2IAsa7XGBaZMIhLVfPVgfxbsyzK5Xtj1UeDa6ACqshnA.jpg" alt="Logo" class="h-10 w-10" />
+            <h1 class="text-white text-2xl ml-2">My Books</h1>
+        </div>
+        <div class="flex items-center">
+            <input type="text" placeholder="🔍  Enter exact text" class="p-2 rounded-md" />
+            <nav class="ml-4">
+                <a href="#" class="text-white mx-2">Category</a>
+                <a href="#" class="text-white mx-2">Feat</a>
+                <a href="#" class="text-white mx-2">About us</a>
+                <a href="#" class="text-white mx-2">UserName</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex justify-center items-center min-h-screen">
+        <!-- Left image section -->
+        <div class="flex items-center p-8 rounded-lg max-w-6xl gap-20">
+            <div class="w-1/2 pr-8">
+                <img src="https://storage.googleapis.com/a1aa/image/iL521wGs23aYN5bfRgf9oI8yFWlqJ3FCe5P1DyeJgr6LUZDPB.jpg" alt="Elderly man reading a book in a library" class="w-full rounded-lg" />
+            </div>
+
+            <!-- Right form section with ASP.NET Razor Form -->
+            <div class="bg-yellow-300 min-h-screen flex justify-center items-center p-4 w-[50%]">
+                <!-- Small Container for the Form -->
+                <div class="w-[85%] bg-inherit rounded-lg">
+                    <h2 class="text-xl font-bold mb-4 border-b-2 border-black pb-2">New Account/Sign Up</h2>
+
+                    <form asp-controller="Account" asp-action="Register" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <!-- Role Selection Dropdown -->
+                        <div class="mb-3">
+                            <label asp-for="Role" class="block mb-2 text-gray-700">Role</label>
+                            <select asp-for="Role" class="w-full p-2 mb-2 rounded-md" required>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-red-500"></span>
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="block mb-2 text-gray-700">First Name</label>
+                            <input asp-for="FirstName" class="w-full p-2 mb-2 rounded-md" required />
+                            <span asp-validation-for="FirstName" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="block mb-2 text-gray-700">Last Name</label>
+                            <input asp-for="LastName" class="w-full p-2 mb-2 rounded-md" required />
+                            <span asp-validation-for="LastName" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label asp-for="Email" class="block mb-2 text-gray-700">Email</label>
+                            <input asp-for="Email" type="email" class="w-full p-2 mb-2 rounded-md" required />
+                            <span asp-validation-for="Email" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Mobile Number -->
+                        <div class="mb-3">
+                            <label asp-for="MobileNumber" class="block mb-2 text-gray-700">Mobile Number</label>
+                            <input asp-for="MobileNumber" type="tel" class="w-full p-2 mb-2 rounded-md" required />
+                            <span asp-validation-for="MobileNumber" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label asp-for="Password" class="block mb-2 text-gray-700">Password</label>
+                            <input asp-for="Password" type="password" class="w-full p-2 mb-2 rounded-md" required />
+                            <span asp-validation-for="Password" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="block mb-2 text-gray-700">Confirm Password</label>
+                            <input asp-for="ConfirmPassword" type="password" class="w-full p-2 mb-4 rounded-md" required />
+                            <span asp-validation-for="ConfirmPassword" class="text-red-500"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="w-full bg-yellow-700 text-white p-2 rounded-md mb-2">Register</button>
+                        <p class="text-center mb-2">
+                            Already have an account? <a href="#" class="text-blue-500">Login</a>
+                        </p>
+                        <button type="button" class="w-full bg-gray-800 text-white p-2 rounded-md">Continue with Google</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-8">
+        <div class="flex justify-around">
+            <div>
+                <h3 class="font-bold mb-2">About Us</h3>
+                <ul>
+                    <li><a href="#" class="text-gray-400">Contact Us</a></li>
+                    <li><a href="#" class="text-gray-400">Brand Story</a></li>
+                    <li><a href="#" class="text-gray-400">Blogs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-2">Policies</h3>
+                <ul>
+                    <li><a href="#" class="text-gray-400">Privacy Policy</a></li>
+                    <li><a href="#" class="text-gray-400">Track your order</a></li>
+                    <li><a href="#" class="text-gray-400">Shipping & Returns</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center">
+                <a href="#" class="text-gray-400 mx-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-gray-400 mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 mx-2"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    @section Scripts {
+        @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <div class="relative inline-block text-left">
+                <!-- User Name as Dropdown Trigger -->
+                <button id="dropdownButton" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                    @User.Identity?.Name!
+                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div id="userDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <a href="@Url.Action("Profile", "Account")" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                            Profile
+                        </a>
+                        <form method="post" action="@Url.Action("Logout", "Account")">
+                            <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <form asp-controller="Account" asp-action="DeleteAccount" method="post">
+                <button type="submit" class="btn btn-danger">Delete Account</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <a class="text-white mx-2" asp-controller="Account" asp-action="Register" method="get">Register</a>
+        <a class="text-white mx-2" asp-controller="Account" asp-action="Login" method="get">Login</a>
+    }
+</ul>
+
+@section Scripts {
+    <script>
+        document.getElementById('dropdownButton').addEventListener('click', function () {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function (e) {
+            console.log("Button clicked");
+            const dropdown = document.getElementById('userDropdown');
+            const button = document.getElementById('dropdownButton');
+
+            // Check if click is outside dropdown and button
+            if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+}
