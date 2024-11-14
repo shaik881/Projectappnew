@@ -6,6 +6,7 @@ namespace DefaultIdentityColumnRename.Models
 {
     public class User:IdentityUser
     {
+        //git changes
         [Required]
         public string FirstName {  get; set; }
         [Required]
