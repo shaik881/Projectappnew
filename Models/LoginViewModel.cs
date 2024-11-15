@@ -5,8 +5,8 @@ namespace DefaultIdentityColumnRename.Models
 {
     public class LoginViewModel
     {
-       // [Required, EmailAddress]
-        //[Remote(action: "LoginEmail", controller: "RemoteValidation")]
+        [Required, EmailAddress]
+        [Remote(action: "LoginEmail", controller: "RemoteValidation")]
         public string Email { get; set; }
 
         [Required, DataType(DataType.Password)]

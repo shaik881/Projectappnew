@@ -1,0 +1,139 @@
+﻿@model ProfileViewModel
+@{
+    Layout = "_ProLayout";
+}
+@{
+    string UserName = Model.FirstName + " " + Model.LastName;
+}
+<form asp-controller="Account" asp-action="Profile" method="post" enctype="multipart/form-data">
+<div class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="flex justify-between w-4/5 bg-white">
+        
+        <!-- Sidebar (Image Section) -->
+        <div class="w-1/4 flex flex-col items-center">
+            <div class="mb-4 mt-8">
+                @if (Model.ShowPic != null && Model.ShowPic.Length > 0)
+                {
+                    var base64String = Convert.ToBase64String(Model.ShowPic);
+                    <img id="profileImage" src="data:image/jpeg;base64,@base64String"
+                         class="w-32 h-32 rounded-full object-cover cursor-pointer border border-gray-300"
+                         onclick="document.getElementById('fileInput').click();" alt="Profile Image" />
+                }
+                else
+                {
+                    <img id="profileImage"
+                         src="/images/default-avatar.png"
+                         class="w-32 h-32 rounded-full object-cover cursor-pointer border border-gray-300"
+                         onclick="document.getElementById('fileInput').click();" alt="Profile Image" />
+                }
+            </div>
+            <input type="file" id="fileInput" name="Pic" accept="image/*" class="hidden" onchange="previewImage(event);" />
+            <p class="text-center mb-8 font-bold text-black text-xl">@UserName</p>
+            <div class="w-full">
+                <ul class="text-center">
+
+                    <li class="py-2 hover:bg-gray-200 cursor-pointer">My Wishlist</li>
+                    <li class="py-2 hover:bg-gray-200 cursor-pointer">My Orders</li>
+                    <li class="py-2 hover:bg-gray-200 cursor-pointer">Personal Information</li>
+                    <li class="py-2 hover:bg-gray-200 cursor-pointer">Sign Out</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="w-2/3 bg-yellow-100 p-8 rounded-lg ml-4">
+            <h2 class="text-2xl font-semibold mb-6">Personal Details</h2>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label asp-for="FirstName" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="FirstName" class="w-full p-2 border border-gray-300 rounded" />
+                    <span asp-validation-for="FirstName" class="text-red-500 text-sm"></span>
+                </div>
+                <div>
+                    <label asp-for="LastName" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="LastName" class="w-full p-2 border border-gray-300 rounded" />
+                    <span asp-validation-for="LastName" class="text-red-500 text-sm"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label asp-for="Email" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="Email" class="w-full p-2 border border-gray-300 rounded" type="email" />
+                    <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                </div>
+                <div>
+                    <label asp-for="DOB" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="DOB" class="w-full p-2 border border-gray-300 rounded" type="date" />
+                    <span asp-validation-for="DOB" class="text-red-500 text-sm"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label asp-for="MobileNumber" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="MobileNumber" class="w-full p-2 border border-gray-300 rounded" />
+                    <span asp-validation-for="MobileNumber" class="text-red-500 text-sm"></span>
+                </div>
+                <div>
+                    <label asp-for="PinCode" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="PinCode" class="w-full p-2 border border-gray-300 rounded" type="number" />
+                    <span asp-validation-for="PinCode" class="text-red-500 text-sm"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label asp-for="State" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="State" class="w-full p-2 border border-gray-300 rounded" />
+                    <span asp-validation-for="State" class="text-red-500 text-sm"></span>
+                </div>
+                <div>
+                    <label asp-for="Country" class="block text-sm font-medium mb-1"></label>
+                    <input asp-for="Country" class="w-full p-2 border border-gray-300 rounded" />
+                    <span asp-validation-for="Country" class="text-red-500 text-sm"></span>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Address" class="block text-sm font-medium mb-1"></label>
+                <textarea asp-for="Address" class="w-full p-2 border border-gray-300 rounded"></textarea>
+                <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Gender" class="block text-sm font-medium mb-1"></label>
+                <div class="flex items-center">
+                    <input asp-for="Gender" type="radio" value="Male" class="mr-2" /> <label class="mr-4">Male</label>
+                    <input asp-for="Gender" type="radio" value="Female" class="mr-2" /> <label class="mr-4">Female</label>
+                    <input asp-for="Gender" type="radio" value="Other" class="mr-2" /> <label>Other</label>
+                </div>
+                <span asp-validation-for="Gender" class="text-red-500 text-sm"></span>
+            </div>
+
+            <div class="flex justify-end">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded mr-2" type="submit">Save</button>
+                <button class="bg-gray-300 text-black px-4 py-2 rounded" type="reset">Cancel</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Preview the uploaded profile image
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('profileImage');
+                output.src = reader.result;  // Set image source to the uploaded image
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}
+

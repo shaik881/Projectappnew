@@ -19,16 +19,18 @@
         </div>
         <div class="flex items-center">
             <input type="text" placeholder="🔍  Enter exact text" class="p-2 rounded-md" />
-            <nav class="ml-8">
+            <nav class="d-flex flex-row ms-6 ">
                 <a href="#" class="text-white mx-2">Category</a>
                 <a href="#" class="text-white mx-2">Feat</a>
-                <a href="#" class="text-white mx-2">About us</a>               
-            </nav>
-            <div> <partial name="_ProLoginPartial" /></div>
+                <a href="#" class="text-white mx-2">About us</a>
+                
+            </nav> 
+               @* <div class="flex items-center"> <partial name="_ProLoginPartial" /></div>  *@
+           <partial name="_ProLoginPartial" />
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid" style="padding: 0;">
+        <main role="main" >
             @RenderBody()
         </main>
     </div>

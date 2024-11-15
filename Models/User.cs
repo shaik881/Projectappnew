@@ -16,5 +16,7 @@ namespace DefaultIdentityColumnRename.Models
 
         [Required, Phone]
         public string MobileNumber { get; set; }
+        public UserProfile Profile { get; set; }
     }
 }
+

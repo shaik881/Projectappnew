@@ -1,0 +1,46 @@
+﻿@model LoginViewModel
+@{
+    Layout = "_ProLayout";
+}
+<main class="bg-yellow-500 font-roboto flex justify-center items-center min-h-screen">
+    <!-- Left image section -->
+    <div class="flex items-center p-8 rounded-lg max-w-6xl gap-20">
+        <div class="w-1/2 pr-8">
+            <img src="https://storage.googleapis.com/a1aa/image/iL521wGs23aYN5bfRgf9oI8yFWlqJ3FCe5P1DyeJgr6LUZDPB.jpg" alt="Elderly man reading a book in a library" class="w-full rounded-lg" />
+        </div>
+<div class="bg-yellow-300 p-8 rounded-lg shadow-md w-80">
+    <h2 class="text-xl font-bold mb-4">Account Login</h2>
+    <hr class="mb-4">
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <!-- Validation Summary -->
+                <div asp-validation-summary="All" class="text-red-500 text-sm mb-4"></div>
+
+                <div class="mb-4">
+                    <label asp-for="Email" class="block text-gray-700 text-sm font-bold mb-2">Email-Id</label>
+                    <input asp-for="Email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Xyz@gmail.com" />
+                    <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input asp-for="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Xyz@123" />
+                    <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+                </div>
+
+                <div class="mb-4 text-right">
+                    <a href="#" class="text-sm text-gray-700">Forgot Password</a>
+                </div>
+
+                <div class="mb-4">
+                    <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded w-full" type="submit">
+                        Login
+                    </button>
+                </div>
+
+                <div class="text-center text-sm">
+                    <span>Don't have an account?</span> <a href="#" class="text-gray-700">Sign up</a>
+                </div>
+            </form>
+</div>
+</div>
+</main>
