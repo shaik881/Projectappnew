@@ -126,9 +126,10 @@ namespace DefaultIdentityColumnRename.Controllers
         public async Task<IActionResult> Profile()
         {
             var user = await _userManager.GetUserAsync(User);
-            var UserProfile = _profileService.FindUserProfile(user);
             if (user == null )
                 return BadRequest("user");
+            var UserProfile = _profileService.FindUserProfile(user);
+           
             ProfileViewModel profile = new ProfileViewModel()
             {
                 FirstName = user.FirstName,
@@ -159,7 +160,7 @@ namespace DefaultIdentityColumnRename.Controllers
             user.LastName = model.LastName;
             var profile = new UserProfile()
             {
-                Pic = await _profileService.ConvertToByteArray(model.Pic),
+                Pic = await _profileService.ConvertToByteArray(model.Pic,user),
                 Address = model.Address,
                 Pincode = model.PinCode,
                 State = model.State,

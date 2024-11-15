@@ -11,7 +11,7 @@
                     @User.Identity?.Name!
                 </button>
                 <ul class="dropdown-menu" style="background-color: #FDF2D0">
-                    <li><a class="dropdown-item"  href="#">Profile</a></li>
+                    <li><a class="dropdown-item"  asp-controller="Account" asp-action="Profile" method="get">Profile</a></li>
                     <li><a class="dropdown-item"  asp-controller="Account" asp-action="Logout">Logout</a></li>
                     
                 </ul>

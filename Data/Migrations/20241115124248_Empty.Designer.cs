@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DefaultIdentityColumnRename.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241115080732_Makingnull")]
-    partial class Makingnull
+    [Migration("20241115124248_Empty")]
+    partial class Empty
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,15 +112,20 @@ namespace DefaultIdentityColumnRename.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Pic")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<int>("Pincode")
+                    b.Property<string>("Pincode")
+                        .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
                         .HasMaxLength(100)

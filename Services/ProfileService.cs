@@ -10,8 +10,13 @@ namespace DefaultIdentityColumnRename.Services
         {
             _context = context;
         }
-        public async Task<byte[]> ConvertToByteArray(IFormFile file)
+        public async Task<byte[]> ConvertToByteArray(IFormFile file,User user)
         {
+            if (file == null)
+            {
+                var u = _context.UserProfiles.Where(x=>x.UserId.Equals(user.Id)).FirstOrDefault();
+                return u.Pic;
+            }
             using (var memoryStream = new MemoryStream())
             {
                 await file.CopyToAsync(memoryStream);
@@ -20,7 +25,9 @@ namespace DefaultIdentityColumnRename.Services
         }
         public UserProfile FindUserProfile(User user)
         {
-            var u = _context.UserProfiles.Where(x=>x.UserId.Equals(user.Id)).FirstOrDefault();
+            var u = _context.UserProfiles
+    .Where(x => x.UserId != null && x.UserId.Equals(user.Id))
+    .FirstOrDefault(); 
             if (u == null)
                 return null;
             return u;
@@ -35,12 +42,13 @@ namespace DefaultIdentityColumnRename.Services
             var user = _context.UserProfiles.Where(x => x.UserId.Equals(profile.UserId)).FirstOrDefault();
             if (user == null)
                 Console.WriteLine("user is null");
-            user.Pincode = profile.Pincode;
+            user.Pincode = profile?.Pincode;
             user.Address = profile?.Address;
             user.Pic = profile?.Pic;
             user.UserId = profile?.UserId;
             user.State = profile?.State;
             user.Gender = profile?.Gender;
+            user.Country = profile?.Country;
              _context.Update(user);
             if(await _context.SaveChangesAsync()!=0)
             {
